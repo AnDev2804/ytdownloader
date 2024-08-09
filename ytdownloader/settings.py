@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-jxeumh_emmvi-x_3ffw@3m9q!4!@kpg_b$3ejyty3zvub+j88g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['AnDev2804.pythonanywhere.com']
 
 
 # Application definition
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'ytdownloader.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'AnDev2804$ytdownloader',
+        'USER': 'AnDev2804',
+        'PASSWORD': 'AnDev*1986',
+        'HOST': 'AnDev2804.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
@@ -116,7 +121,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "downloader" / "static",
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
