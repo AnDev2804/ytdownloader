@@ -125,6 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "downloader" / "static",
 ]
+YOUTUBE_API_KEY = 'AIzaSyDoHf0_HYjbdAuGQI6kCGQK8WbG11OJtD0'
 
 
 # Default primary key field type

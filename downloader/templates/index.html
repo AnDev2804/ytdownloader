@@ -8,17 +8,36 @@
     <!-- Bootstrap CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+<body class="bg-dark d-flex justify-content-center align-items-center vh-100">
     <div class="container bg-white p-4 rounded shadow-sm">
         <h1 class="text-center mb-4">YouTube Downloader</h1>
-        <form action="/download" method="post">
+        <form action="/" method="post">
+            {% csrf_token %}
             <div class="mb-3">
-                <input type="text" name="video_url" class="form-control" placeholder="Ingresa la URL del video" required>
+                <input type="text" name="video_url" class="form-control w-75 mx-auto" placeholder="Ingresa la URL del video" required>
             </div>
-            <div class="d-grid">
+            <div class="d-grid w-50 mx-auto">
                 <button type="submit" class="btn btn-primary">Descargar</button>
             </div>
         </form>
+
+        {% if video_info %}
+        <div class="mt-5">
+            <h2>{{ video_info.title }}</h2>
+            <p>Canal: {{ video_info.channel_title }}</p>
+            <img src="{{ video_info.thumbnail_url }}" alt="Thumbnail">
+            <form action="/download/mp4/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <button type="submit" class="btn btn-success mt-3">Descargar como MP4</button>
+            </form>
+            <form action="/download/mp3/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <button type="submit" class="btn btn-success mt-3">Descargar como MP3</button>
+            </form>
+        </div>
+        {% endif %}
     </div>
 
     <!-- Bootstrap JS -->
