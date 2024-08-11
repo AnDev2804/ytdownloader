@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jxeumh_emmvi-x_3ffw@3m9q!4!@kpg_b$3ejyty3zvub+j88g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['AnDev2804.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'ytdownloader.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AnDev2804$ytdownloader',
-        'USER': 'AnDev2804',
-        'PASSWORD': 'AnDev*1986',
-        'HOST': 'AnDev2804.mysql.pythonanywhere-services.com',
+        'NAME': 'ytdownloader',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
