@@ -32,22 +32,13 @@ ALLOWED_HOSTS = ['ytdownloader-8cm9.onrender.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
-    #'django.contrib.auth',
-    #'django.contrib.contenttypes',
-    #'django.contrib.sessions',
-    #'django.contrib.messages',
     'django.contrib.staticfiles',
-    'downloader',
+    'downloader',  # Tu aplicación principal
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -62,7 +53,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.auth.context_processors.auth',  # Elimina esta línea
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -130,8 +121,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 class DisableMigrations:
     def __contains__(self, item):
-        return True
+        return item in ['auth', 'contenttypes']
+
     def __getitem__(self, item):
-        return None
+        if item in self:
+            return None
+        return 'migrations'
 
 MIGRATION_MODULES = DisableMigrations()

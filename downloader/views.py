@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from pytube import YouTube
-from django.http import FileResponse, HttpResponse
-from pytube.exceptions import VideoUnavailable
+from django.http import FileResponse
 import os
+from yt_dlp import YoutubeDL
 
 def home(request):
     video_info = None
@@ -10,16 +9,14 @@ def home(request):
     if request.method == 'POST':
         video_url = request.POST.get('video_url')
         try:
-            yt = YouTube(video_url)
-            video_info = {
-                'title': yt.title,
-                'thumbnail_url': yt.thumbnail_url,
-                'channel_title': yt.author,
-                'video_url': video_url
-            }
-        except VideoUnavailable:
-            error_message = "El video no está disponible o no se puede acceder en este momento."
-            print(error_message)
+            with YoutubeDL() as ydl:
+                info_dict = ydl.extract_info(video_url, download=False)
+                video_info = {
+                    'title': info_dict.get('title', None),
+                    'thumbnail_url': info_dict.get('thumbnail', None),
+                    'channel_title': info_dict.get('uploader', None),
+                    'video_url': video_url
+                }
         except Exception as e:
             error_message = f"Error al procesar el video: {str(e)}"
             print(error_message)
@@ -28,17 +25,39 @@ def home(request):
 
 def download_video(request, format):
     video_url = request.POST.get('video_url')
-    yt = YouTube(video_url)
+    ydl_opts = {}
+    file_name = None
     
     if format == 'mp4':
-        stream = yt.streams.get_highest_resolution()
+        ydl_opts = {
+            'format': 'bestvideo+bestaudio',
+            'outtmpl': '%(title)s.%(ext)s',
+            'ffmpeg_location': r'C:\ffmpeg-2024-08-11-git-43cde54fc1-full_build\bin',  # Asegúrate de que esta sea la ruta correcta
+        }
     elif format == 'mp3':
-        stream = yt.streams.filter(only_audio=True).first()
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'outtmpl': '%(title)s.%(ext)s',
+            'ffmpeg_location': r'C:\ffmpeg-2024-08-11-git-43cde54fc1-full_build\bin',  # Asegúrate de que esta sea la ruta correcta
+        }
+
+    try:
+        with YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(video_url)
+            file_name = ydl.prepare_filename(info_dict)
+        
+        with open(file_name, 'rb') as file:
+            response = FileResponse(file)
+            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_name)}"'
+        
+        os.remove(file_name)  # Elimina el archivo después de servirlo
+        return response
     
-    output_path = stream.download()
-    file_name = yt.title if format == 'mp4' else yt.title + '.mp3'
-    
-    response = FileResponse(open(output_path, 'rb'))
-    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
-    os.remove(output_path)  # Elimina el archivo después de servirlo
-    return response
+    except Exception as e:
+        error_message = f"Error al descargar el video: {str(e)}"
+        return render(request, 'index.html', {'error_message': error_message})

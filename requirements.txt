@@ -1,4 +1,4 @@
 Django==4.0.6
 gunicorn==22.0.0
-pytube==15.0.0
+yt-dlp
 mysqlclient==2.2.4

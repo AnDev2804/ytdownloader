@@ -1,1 +1,1 @@
-web: gunicorn ytdownloader.wsgi
+web: ./install_ffmpeg.sh && gunicorn ytdownloader.wsgi
