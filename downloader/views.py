@@ -9,7 +9,12 @@ def home(request):
     if request.method == 'POST':
         video_url = request.POST.get('video_url')
         try:
-            with YoutubeDL() as ydl:
+            ydl_opts = {
+                'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'referer': 'https://www.youtube.com/'
+            }
+            with YoutubeDL(ydl_opts) as ydl:
                 info_dict = ydl.extract_info(video_url, download=False)
                 video_info = {
                     'title': info_dict.get('title', None),
@@ -32,8 +37,9 @@ def download_video(request, format):
         ydl_opts = {
             'format': 'bestvideo+bestaudio',
             'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': './cookies.txt',  # Ruta relativa al archivo de cookies dentro de tu proyecto
-            'ffmpeg_location': '/usr/local/bin/',  # Ruta al ffmpeg
+            'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'referer': 'https://www.youtube.com/'
         }
     elif format == 'mp3':
         ydl_opts = {
@@ -44,8 +50,9 @@ def download_video(request, format):
                 'preferredquality': '192',
             }],
             'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': './cookies.txt',  # Ruta relativa al archivo de cookies dentro de tu proyecto
-            'ffmpeg_location': '/usr/local/bin/',  # Ruta al ffmpeg
+            'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'referer': 'https://www.youtube.com/'
         }
 
     try:
