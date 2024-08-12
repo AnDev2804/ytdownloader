@@ -1,21 +1,28 @@
 from django.shortcuts import render
 from pytube import YouTube
 from django.http import FileResponse, HttpResponse
+from pytube.exceptions import VideoUnavailable
 import os
 
 def home(request):
     video_info = None
+    error_message = None
     if request.method == 'POST':
         video_url = request.POST.get('video_url')
-        yt = YouTube(video_url)
-        video_info = {
-            'title': yt.title,
-            'thumbnail_url': yt.thumbnail_url,
-            'channel_title': yt.author,
-            'video_url': video_url
-        }
+        try:
+            yt = YouTube(video_url)
+            video_info = {
+                'title': yt.title,
+                'thumbnail_url': yt.thumbnail_url,
+                'channel_title': yt.author,
+                'video_url': video_url
+            }
+        except VideoUnavailable:
+            error_message = "El video no está disponible o no se puede acceder en este momento."
+        except Exception as e:
+            error_message = f"Error al procesar el video: {str(e)}"
     
-    return render(request, 'index.html', {'video_info': video_info})
+    return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
 def download_video(request, format):
     video_url = request.POST.get('video_url')
