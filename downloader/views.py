@@ -19,8 +19,10 @@ def home(request):
             }
         except VideoUnavailable:
             error_message = "El video no está disponible o no se puede acceder en este momento."
+            print(error_message)
         except Exception as e:
             error_message = f"Error al procesar el video: {str(e)}"
+            print(error_message)
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
