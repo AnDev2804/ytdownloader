@@ -77,13 +77,17 @@ def download_video(request, format):
             info_dict = ydl.extract_info(video_url)
             file_name = ydl.prepare_filename(info_dict)
         
+        # Verificar si el archivo fue creado
+        if not os.path.exists(file_name):
+            raise Exception(f"El archivo {file_name} no se generó correctamente.")
+        
         with open(file_name, 'rb') as file:
             response = FileResponse(file)
             response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_name)}"'
         
         os.remove(file_name)  # Elimina el archivo después de servirlo
         return response
-    
+
     except Exception as e:
         error_message = f"Error al descargar el video: {str(e)}"
         return render(request, 'index.html', {'error_message': error_message})
