@@ -2,29 +2,40 @@ from django.shortcuts import render
 from django.http import FileResponse
 import os
 from yt_dlp import YoutubeDL
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+# Reemplaza 'YOUR_API_KEY' con tu clave de API de YouTube
+YOUTUBE_API_KEY = 'YOUR_API_KEY'
+
+def get_video_info_from_youtube(video_id):
+    try:
+        youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+        request = youtube.videos().list(
+            part='snippet',
+            id=video_id
+        )
+        response = request.execute()
+        video_info = response['items'][0]['snippet']
+        return {
+            'title': video_info['title'],
+            'thumbnail_url': video_info['thumbnails']['high']['url'],
+            'channel_title': video_info['channelTitle']
+        }
+    except HttpError as e:
+        print(f"An HTTP error {e.resp.status} occurred: {e.content}")
+        return None
 
 def home(request):
     video_info = None
     error_message = None
     if request.method == 'POST':
         video_url = request.POST.get('video_url')
-        try:
-            ydl_opts = {
-                'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                'referer': 'https://www.youtube.com/'
-            }
-            with YoutubeDL(ydl_opts) as ydl:
-                info_dict = ydl.extract_info(video_url, download=False)
-                video_info = {
-                    'title': info_dict.get('title', None),
-                    'thumbnail_url': info_dict.get('thumbnail', None),
-                    'channel_title': info_dict.get('uploader', None),
-                    'video_url': video_url
-                }
-        except Exception as e:
-            error_message = f"Error al procesar el video: {str(e)}"
-            print(error_message)
+        video_id = video_url.split('v=')[-1]
+        video_info = get_video_info_from_youtube(video_id)
+
+        if video_info is None:
+            error_message = "Error al procesar el video."
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
