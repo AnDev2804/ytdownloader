@@ -29,16 +29,24 @@ def home(request):
     error_message = None
     if request.method == 'POST':
         video_url = request.POST.get('video_url')
-        video_id = video_url.split('v=')[-1]
-        video_info = get_video_info_from_youtube(video_id)
-
-        if video_info is None:
-            error_message = "Error al procesar el video."
+        if not video_url:
+            error_message = "No se proporcionó una URL."
+        else:
+            video_id = video_url.split('v=')[-1]
+            if not video_id:
+                error_message = "URL inválida."
+            else:
+                video_info = get_video_info_from_youtube(video_id)
+                if video_info is None:
+                    error_message = "Error al procesar el video."
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
 def download_video(request, format):
     video_url = request.POST.get('video_url')
+    if not video_url:
+        return render(request, 'index.html', {'error_message': "No se proporcionó una URL."})
+    
     ydl_opts = {}
     file_name = None
     
