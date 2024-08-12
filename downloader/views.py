@@ -4,13 +4,11 @@ import os
 from yt_dlp import YoutubeDL
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
-# Reemplaza 'YOUR_API_KEY' con tu clave de API de YouTube
-YOUTUBE_API_KEY = 'YOUR_API_KEY'
+from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
 
 def get_video_info_from_youtube(video_id):
     try:
-        youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+        youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)  # Usar API Key desde settings
         request = youtube.videos().list(
             part='snippet',
             id=video_id
