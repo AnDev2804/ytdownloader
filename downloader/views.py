@@ -46,10 +46,10 @@ def download_video(request, format):
     video_url = request.POST.get('video_url')
     if not video_url:
         return render(request, 'index.html', {'error_message': "No se proporcionó una URL."})
-    
+
     ydl_opts = {}
     file_name = None
-    
+
     if format == 'mp4':
         ydl_opts = {
             'format': 'bestvideo+bestaudio',
@@ -76,18 +76,22 @@ def download_video(request, format):
         with YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(video_url)
             file_name = ydl.prepare_filename(info_dict)
-        
-        # Verificar si el archivo fue creado
+            print(f"Archivo generado: {file_name}")
+
+        # Verificar si el archivo se generó y existe
         if not os.path.exists(file_name):
             raise Exception(f"El archivo {file_name} no se generó correctamente.")
-        
+
         with open(file_name, 'rb') as file:
             response = FileResponse(file)
             response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_name)}"'
+            print(f"Archivo enviado: {file_name}")
         
         os.remove(file_name)  # Elimina el archivo después de servirlo
         return response
-
+    
     except Exception as e:
         error_message = f"Error al descargar el video: {str(e)}"
+        print(error_message)  # Log para la consola
         return render(request, 'index.html', {'error_message': error_message})
+
