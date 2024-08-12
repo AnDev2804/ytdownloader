@@ -15,5 +15,5 @@ django-treebeard==4.5.1
 django-xmlrpc==0.1.8
 djangocms-admin-style==3.1.1
 gunicorn
-pytube==15.0.0
+pytube
 mysqlclient
