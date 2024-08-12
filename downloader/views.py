@@ -5,6 +5,7 @@ from yt_dlp import YoutubeDL
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
+import logging
 
 def get_video_info_from_youtube(video_id):
     try:
@@ -23,7 +24,6 @@ def get_video_info_from_youtube(video_id):
     except HttpError as e:
         print(f"An HTTP error {e.resp.status} occurred: {e.content}")
         return None
-
 def home(request):
     video_info = None
     error_message = None
@@ -39,17 +39,22 @@ def home(request):
                 video_info = get_video_info_from_youtube(video_id)
                 if video_info is None:
                     error_message = "Error al procesar el video."
+                else:
+                    video_info['video_url'] = video_url  # Añade la URL del video al contexto
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
+
+logger = logging.getLogger(__name__)
 
 def download_video(request, format):
     video_url = request.POST.get('video_url')
     if not video_url:
+        logger.error("No se proporcionó una URL.")
         return render(request, 'index.html', {'error_message': "No se proporcionó una URL."})
-
+    
     ydl_opts = {}
     file_name = None
-
+    
     if format == 'mp4':
         ydl_opts = {
             'format': 'bestvideo+bestaudio',
@@ -73,25 +78,21 @@ def download_video(request, format):
         }
 
     try:
+        logger.info("Iniciando descarga con yt-dlp...")
         with YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(video_url)
             file_name = ydl.prepare_filename(info_dict)
-            print(f"Archivo generado: {file_name}")
-
-        # Verificar si el archivo se generó y existe
-        if not os.path.exists(file_name):
-            raise Exception(f"El archivo {file_name} no se generó correctamente.")
-
+            logger.info(f"Archivo descargado: {file_name}")
+        
         with open(file_name, 'rb') as file:
             response = FileResponse(file)
             response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_name)}"'
-            print(f"Archivo enviado: {file_name}")
+            logger.info("Archivo listo para enviar.")
         
         os.remove(file_name)  # Elimina el archivo después de servirlo
         return response
     
     except Exception as e:
         error_message = f"Error al descargar el video: {str(e)}"
-        print(error_message)  # Log para la consola
+        logger.error(error_message)
         return render(request, 'index.html', {'error_message': error_message})
-
