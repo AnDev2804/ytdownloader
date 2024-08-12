@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jxeumh_emmvi-x_3ffw@3m9q!4!@kpg_b$3ejyty3zvub+j88g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ytdownloader-8cm9.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
