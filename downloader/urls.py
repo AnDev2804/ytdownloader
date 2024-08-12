@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import home, download_video
+from . import views
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('download/<str:format>/', download_video, name='download_video'),
+    path('', views.home, name='home'),
+    path('download/<str:format>/', views.download_video, name='download_video'),
 ]
