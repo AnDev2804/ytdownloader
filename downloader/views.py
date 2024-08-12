@@ -32,7 +32,8 @@ def download_video(request, format):
         ydl_opts = {
             'format': 'bestvideo+bestaudio',
             'outtmpl': '%(title)s.%(ext)s',
-            'ffmpeg_location': r'C:\ffmpeg-2024-08-11-git-43cde54fc1-full_build\bin',  # Asegúrate de que esta sea la ruta correcta
+            'cookiefile': './cookies.txt',  # Ruta relativa al archivo de cookies dentro de tu proyecto
+            'ffmpeg_location': '/usr/local/bin/',  # Ruta al ffmpeg
         }
     elif format == 'mp3':
         ydl_opts = {
@@ -43,7 +44,8 @@ def download_video(request, format):
                 'preferredquality': '192',
             }],
             'outtmpl': '%(title)s.%(ext)s',
-            'ffmpeg_location': r'C:\ffmpeg-2024-08-11-git-43cde54fc1-full_build\bin',  # Asegúrate de que esta sea la ruta correcta
+            'cookiefile': './cookies.txt',  # Ruta relativa al archivo de cookies dentro de tu proyecto
+            'ffmpeg_location': '/usr/local/bin/',  # Ruta al ffmpeg
         }
 
     try:
