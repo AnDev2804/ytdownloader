@@ -46,6 +46,16 @@
     <!-- Custom JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Evita que el formulario se envíe automáticamente
+                const videoUrl = this.querySelector('input[name="video_url"]').value;
+                console.log("URL que se va a enviar:", videoUrl); // Esto imprimirá la URL en la consola
+                // Aquí puedes agregar el código para enviar el formulario vía AJAX si es necesario
+                form.submit(); // Esto enviará el formulario después de hacer el debug
+            });
+        });
+
         function checkTaskStatus(taskId) {
             $.get(`/task-status/${taskId}/`, function(data) {
                 if (data.status === 'SUCCESS') {
