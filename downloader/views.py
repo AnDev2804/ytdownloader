@@ -58,12 +58,20 @@ def download_video(request, format):
     # Devuelve una respuesta que indica que la tarea ha comenzado
     return JsonResponse({"status": "Task started", "task_id": task.id})
 
-def get_task_status(request, task_id):
-    task = AsyncResult(task_id)
-    if task.state == 'SUCCESS':
-        result = task.result
-        return JsonResponse({'status': 'SUCCESS', 'file_url': result['file_url']})
-    elif task.state == 'FAILURE':
-        return JsonResponse({'status': 'FAILURE', 'error': str(task.result)})
+def task_status(request, task_id):
+    result = AsyncResult(task_id)
+    if result.state == 'SUCCESS':
+        response = {
+            'status': 'SUCCESS',
+            'file_url': result.result,  # Asume que la tarea devuelve la URL del archivo al finalizar
+        }
+    elif result.state == 'FAILURE':
+        response = {
+            'status': 'FAILURE',
+            'error': str(result.result),
+        }
     else:
-        return JsonResponse({'status': task.state})
+        response = {
+            'status': result.state,
+        }
+    return JsonResponse(response)
