@@ -58,12 +58,16 @@ def download_video(request, format):
     # Devuelve una respuesta que indica que la tarea ha comenzado
     return JsonResponse({"status": "Task started", "task_id": task.id})
 
+logger = logging.getLogger('downloader')
+
 def task_status(request, task_id):
     result = AsyncResult(task_id)
+    logger.debug(f"Estado de la tarea {task_id}: {result.state}")
+    
     if result.state == 'SUCCESS':
         response = {
             'status': 'SUCCESS',
-            'file_url': result.result,  # Asume que la tarea devuelve la URL del archivo al finalizar
+            'file_url': result.result['file_url'],  # Asegúrate de que 'file_url' es la clave correcta
         }
     elif result.state == 'FAILURE':
         response = {
