@@ -60,37 +60,26 @@ def download_video(request, format):
         if not video_url:
             return JsonResponse({"error": "No se proporcionó una URL."})
 
-        ydl_opts = {}
+        ydl_opts = {
+            'ffmpeg_location': ffmpeg_location,
+            'outtmpl': 'media/%(title)s.%(ext)s',  # Asegura que se guarda en la carpeta 'media'
+            'cookiefile': 'cookies.txt',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'n_threads': 1,  # Usa solo un hilo
+            'logger': logger,
+            'progress_hooks': [lambda d: logger.debug(f"Progreso de la descarga: {d}")],
+            'download_timeout': 300  # Límite de tiempo de descarga de 5 minutos
+        }
 
         if format == 'mp4':
-            ydl_opts = {
-                'format': 'best[height<=480]',  # Limita la calidad a 480p o menos
-                'ffmpeg_location': ffmpeg_location,
-                'outtmpl': '%(title)s.%(ext)s',
-                'cookiefile': 'cookies.txt',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                'referer': 'https://www.youtube.com/',
-                'n_threads': 1,  # Usa solo un hilo
-                'logger': logger,
-                'progress_hooks': [lambda d: logger.debug(f"Progreso de la descarga: {d}")],
-                'download_timeout': 300  # Límite de tiempo de descarga de 5 minutos
-            }
+            ydl_opts['format'] = 'best[height<=480]'  # Limita la calidad a 480p o menos
         elif format == 'mp3':
-            ydl_opts = {
-                'format': 'bestaudio/best',
-                'ffmpeg_location': ffmpeg_location,
-                'cookiefile': 'cookies.txt',
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '128',
-                }],
-                'outtmpl': '%(title)s.%(ext)s',
-                'n_threads': 1,
-                'logger': logger,
-                'progress_hooks': [lambda d: logger.debug(f"Progreso de la descarga: {d}")],
-                'download_timeout': 300,
-            }
+            ydl_opts['format'] = 'bestaudio/best'
+            ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '128',
+            }]
 
         try:
             with YoutubeDL(ydl_opts) as ydl:
@@ -99,10 +88,9 @@ def download_video(request, format):
                 file_name = ydl.prepare_filename(info_dict)
                 logger.debug(f"Video descargado con éxito: {file_name}")
             
-            file_url = f"/media/{os.path.basename(file_name)}"
+            file_url = f"{settings.MEDIA_URL}{os.path.basename(file_name)}"
             return JsonResponse({"status": "SUCCESS", "file_url": file_url})
 
         except Exception as e:
             logger.error(f"Error al descargar el video: {str(e)}")
             return JsonResponse({"status": "FAILURE", "error": str(e)})
-

@@ -50,38 +50,22 @@
     <!-- Custom JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $("#downloadMp4Button").click(function() {
-            var videoUrl = $("#downloadMp4Form input[name='video_url']").val();
-            
-            console.log("Intentando descargar MP4 con la URL:", videoUrl); // Debugging
-
+        $("#downloadMp4Button, #downloadMp3Button").click(function(event) {
+            event.preventDefault();
+            var videoUrl = $(this).closest("form").find("input[name='video_url']").val();
+            var downloadFormat = $(this).attr("id") === "downloadMp4Button" ? "mp4" : "mp3";
+    
             if (!videoUrl) {
                 alert("Error: No se proporcionó una URL.");
                 return;
             }
-
-            $.post($("#downloadMp4Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
+    
+            $.post(`/download/${downloadFormat}/`, { 
+                video_url: videoUrl, 
+                csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() 
+            }, function(data) {
                 if (data.status === "SUCCESS") {
-                    window.location.href = data.file_url;
-                } else {
-                    alert("Error: " + data.error);
-                }
-            });
-        });
-
-        $("#downloadMp3Button").click(function() {
-            var videoUrl = $("#downloadMp3Form input[name='video_url']").val();
-
-            console.log("Intentando descargar MP3 con la URL:", videoUrl); // Debugging
-            
-            if (!videoUrl) {
-                alert("Error: No se proporcionó una URL.");
-                return;
-            }
-
-            $.post($("#downloadMp3Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-                if (data.status === "SUCCESS") {
-                    window.location.href = data.file_url;
+                    alert("¡Descarga completada con éxito!");
                 } else {
                     alert("Error: " + data.error);
                 }
