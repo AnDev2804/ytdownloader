@@ -1,10 +1,13 @@
+import logging
 from celery import shared_task
 from yt_dlp import YoutubeDL
 import os
 
+logger = logging.getLogger('downloader')  # Obtén el logger configurado para tu aplicación
+
 @shared_task
 def download_video_task(video_url, format):
-    print(f"Iniciando descarga para {video_url} en formato {format}")
+    logger.debug(f"Iniciando descarga para {video_url} en formato {format}")
     ydl_opts = {}
     if format == 'mp4':
         ydl_opts = {
@@ -30,15 +33,15 @@ def download_video_task(video_url, format):
 
     try:
         with YoutubeDL(ydl_opts) as ydl:
-            print("Descargando el video...")
+            logger.debug("Descargando el video...")
             info_dict = ydl.extract_info(video_url)
             file_name = ydl.prepare_filename(info_dict)
-            print(f"Video descargado: {file_name}")
+            logger.debug(f"Video descargado: {file_name}")
 
         file_url = f"/media/{os.path.basename(file_name)}"
-        print(f"Archivo disponible en: {file_url}")
+        logger.debug(f"Archivo disponible en: {file_url}")
         return {'file_url': file_url}
     
     except Exception as e:
-        print(f"Error durante la descarga: {str(e)}")
+        logger.error(f"Error durante la descarga: {str(e)}")
         return str(e)
