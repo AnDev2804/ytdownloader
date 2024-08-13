@@ -75,20 +75,17 @@ def download_video(request, format):
             }
         elif format == 'mp3':
             ydl_opts = {
-                'format': 'bestaudio[ext=m4a]',  # Baja calidad de audio
+                'format': 'bestaudio/best',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '64',  # Baja calidad del MP3
+                    'preferredquality': '64',
                 }],
                 'outtmpl': '%(title)s.%(ext)s',
-                'cookiefile': 'cookies.txt',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                'referer': 'https://www.youtube.com/',
-                'n_threads': 1,  # Usa solo un hilo
+                'n_threads': 1,
                 'logger': logger,
                 'progress_hooks': [lambda d: logger.debug(f"Progreso de la descarga: {d}")],
-                'download_timeout': 300  # Límite de tiempo de descarga de 5 minutos
+                'download_timeout': 300,
             }
 
         try:
