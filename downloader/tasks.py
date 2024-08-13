@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 @shared_task
 def download_video_task(video_url, format):
-    logger.info(f"Comenzando descarga para la URL: {video_url} con el formato: {format}")
-    
+    logger.info(f"Iniciando descarga para la URL: {video_url} con formato: {format}")
     ydl_opts = {}
     if format == 'mp4':
         ydl_opts = {
@@ -34,16 +33,13 @@ def download_video_task(video_url, format):
         }
 
     try:
-        logger.info(f"Opciones de descarga configuradas: {ydl_opts}")
+        logger.info(f"Opciones de descarga: {ydl_opts}")
         with YoutubeDL(ydl_opts) as ydl:
-            logger.info("Iniciando la extracción de información y descarga...")
             info_dict = ydl.extract_info(video_url)
-            logger.info(f"Información del video extraída: {info_dict}")
             file_name = ydl.prepare_filename(info_dict)
-            logger.info(f"Archivo descargado: {file_name}")
 
         file_url = os.path.join(settings.MEDIA_URL, file_name)
-        logger.info(f"URL del archivo generado: {file_url}")
+        logger.info(f"Descarga completada. Archivo guardado en: {file_url}")
         return {'file_url': file_url}
     
     except Exception as e:
