@@ -57,23 +57,18 @@ def download_video(request, format):
     
     if format == 'mp4':
         ydl_opts = {
-            'format': 'bestvideo+bestaudio',
+            'format': 'worstvideo',  # Cambia a una calidad más baja
             'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'cookiefile': 'cookies.txt',  
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
             'referer': 'https://www.youtube.com/'
         }
-    elif format == 'mp3':
+    if format == 'mp3':
         ydl_opts = {
-            'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
+            'format': 'worstaudio',  # Cambia a una calidad más baja
             'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': 'cookies.txt',  # Ruta relativa al archivo de cookies
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'cookiefile': 'cookies.txt',  
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
             'referer': 'https://www.youtube.com/'
         }
 

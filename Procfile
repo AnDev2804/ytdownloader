@@ -1,1 +1,1 @@
-web: ./install_ffmpeg.sh && gunicorn ytdownloader.wsgi --timeout 300
+web: ./install_ffmpeg.sh && gunicorn ytdownloader.wsgi --timeout 600
