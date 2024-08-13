@@ -1,6 +1,7 @@
 from celery import shared_task
 from yt_dlp import YoutubeDL
 import os
+from django.conf import settings
 
 @shared_task
 def download_video_task(video_url, format):
@@ -31,6 +32,7 @@ def download_video_task(video_url, format):
         with YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(video_url)
             file_name = ydl.prepare_filename(info_dict)
+
 
         file_url = os.path.join(settings.MEDIA_URL, file_name)
         return {'file_url': file_url}
