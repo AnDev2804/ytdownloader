@@ -28,12 +28,12 @@
             <img src="{{ video_info.thumbnail_url }}" alt="Thumbnail">
             <form id="downloadMp4Form" action="/download/mp4/" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <input type="text" name="video_url" value="{{ video_info.video_url }}">
                 <button type="button" id="downloadMp4Button" class="btn btn-success mt-3">Descargar como MP4</button>
             </form>
             <form id="downloadMp3Form" action="/download/mp3/" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <input type="text" name="video_url" value="{{ video_info.video_url }}">
                 <button type="button" id="downloadMp3Button" class="btn btn-success mt-3">Descargar como MP3</button>
             </form>
         </div>
@@ -61,24 +61,39 @@
         }
 
         $("#downloadMp4Button").click(function() {
-            $.post($("#downloadMp4Form").attr('action'), { video_url: $("input[name='video_url']").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-                if (data.status === "Task started") {
-                    checkTaskStatus(data.task_id);
-                } else {
-                    alert("Error: " + data.error);
-                }
-            });
-        });
+    var videoUrl = $("input[name='video_url']").val();
+    
+    if (!videoUrl) {
+        alert("Error: No se proporcionó una URL.");
+        return;
+    }
 
-        $("#downloadMp3Button").click(function() {
-            $.post($("#downloadMp3Form").attr('action'), { video_url: $("input[name='video_url']").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-                if (data.status === "Task started") {
-                    checkTaskStatus(data.task_id);
-                } else {
-                    alert("Error: " + data.error);
-                }
-            });
+    $.post($("#downloadMp4Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
+            if (data.status === "Task started") {
+                checkTaskStatus(data.task_id);
+            } else {
+                alert("Error: " + data.error);
+            }
         });
+    });
+
+    $("#downloadMp3Button").click(function() {
+        var videoUrl = $("input[name='video_url']").val();
+        
+        if (!videoUrl) {
+            alert("Error: No se proporcionó una URL.");
+            return;
+        }
+
+        $.post($("#downloadMp3Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
+            if (data.status === "Task started") {
+                checkTaskStatus(data.task_id);
+            } else {
+                alert("Error: " + data.error);
+            }
+        });
+    });
+
     </script>
 </body>
 </html>
