@@ -3,3 +3,5 @@ gunicorn==22.0.0
 yt-dlp
 mysqlclient==2.2.4
 google-api-python-client
+celery
+redis

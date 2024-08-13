@@ -6,6 +6,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
 import logging
+from celery import shared_task
 
 def get_video_info_from_youtube(video_id):
     try:
@@ -45,7 +46,7 @@ def home(request):
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
 logger = logging.getLogger(__name__)
-
+@shared_task
 def download_video(request, format):
     video_url = request.POST.get('video_url')
     if not video_url:
