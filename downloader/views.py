@@ -47,35 +47,49 @@ def home(request):
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
+logger = logging.getLogger('downloader')
+
 def download_video(request, format):
     video_url = request.POST.get('video_url')
+    
     if not video_url:
         return JsonResponse({"error": "No se proporcionó una URL."})
 
-    # Llama a la tarea asíncrona
-    task = download_video_task.delay(video_url, format)
+    ydl_opts = {}
 
-    # Devuelve una respuesta que indica que la tarea ha comenzado
-    return JsonResponse({"status": "Task started", "task_id": task.id})
+    if format == 'mp4':
+        ydl_opts = {
+            'format': 'bestvideo+bestaudio',
+            'outtmpl': '%(title)s.%(ext)s',
+            'cookiefile': 'cookies.txt',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'referer': 'https://www.youtube.com/'
+        }
+    elif format == 'mp3':
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'outtmpl': '%(title)s.%(ext)s',
+            'cookiefile': 'cookies.txt',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'referer': 'https://www.youtube.com/'
+        }
 
-logger = logging.getLogger('downloader')
+    try:
+        with YoutubeDL(ydl_opts) as ydl:
+            logger.debug(f"Iniciando descarga del video: {video_url}")
+            info_dict = ydl.extract_info(video_url, download=True)
+            file_name = ydl.prepare_filename(info_dict)
+            logger.debug(f"Video descargado con éxito: {file_name}")
+        
+        # Genera la URL de descarga (esto depende de cómo configures tu servidor)
+        file_url = f"/media/{os.path.basename(file_name)}"
+        return JsonResponse({"status": "SUCCESS", "file_url": file_url})
 
-def task_status(request, task_id):
-    result = AsyncResult(task_id)
-    logger.debug(f"Estado de la tarea {task_id}: {result.state}")
-    
-    if result.state == 'SUCCESS':
-        response = {
-            'status': 'SUCCESS',
-            'file_url': result.result['file_url'],  # Asegúrate de que 'file_url' es la clave correcta
-        }
-    elif result.state == 'FAILURE':
-        response = {
-            'status': 'FAILURE',
-            'error': str(result.result),
-        }
-    else:
-        response = {
-            'status': result.state,
-        }
-    return JsonResponse(response)
+    except Exception as e:
+        logger.error(f"Error al descargar el video: {str(e)}")
+        return JsonResponse({"status": "FAILURE", "error": str(e)})
