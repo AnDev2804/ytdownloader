@@ -53,6 +53,7 @@ def home(request):
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
 def download_video(request, format):
+    ffmpeg_location = r'C:\ffmpeg-2024-08-11-git-43cde54fc1-full_build\bin'
     with download_lock:
         video_url = request.POST.get('video_url')
         
@@ -64,6 +65,7 @@ def download_video(request, format):
         if format == 'mp4':
             ydl_opts = {
                 'format': 'best[height<=480]',  # Limita la calidad a 480p o menos
+                'ffmpeg_location': ffmpeg_location,
                 'outtmpl': '%(title)s.%(ext)s',
                 'cookiefile': 'cookies.txt',
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
@@ -76,6 +78,7 @@ def download_video(request, format):
         elif format == 'mp3':
             ydl_opts = {
                 'format': 'bestaudio/best',
+                'ffmpeg_location': ffmpeg_location,
                 'cookiefile': 'cookies.txt',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',

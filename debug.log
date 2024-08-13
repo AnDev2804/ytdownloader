@@ -4647,3 +4647,59 @@ Estado de la tarea 84761b72-6da4-4227-8633-766e482dc053: PENDING
 "GET /task-status/84761b72-6da4-4227-8633-766e482dc053/ HTTP/1.1" 200 21
 Estado de la tarea 84761b72-6da4-4227-8633-766e482dc053: PENDING
 "GET /task-status/84761b72-6da4-4227-8633-766e482dc053/ HTTP/1.1" 200 21
+Iniciando descarga del video: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] Extracting URL: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] R_6ItxioUco: Downloading webpage
+[youtube] Unable to download webpage: <urllib3.connection.HTTPSConnection object at 0x0000022995F81D30>: Failed to resolve 'www.youtube.com' ([Errno 11001] getaddrinfo failed)
+[youtube] R_6ItxioUco: Downloading ios player API JSON
+[youtube] <urllib3.connection.HTTPSConnection object at 0x0000022995C2DD30>: Failed to resolve 'www.youtube.com' ([Errno 11001] getaddrinfo failed). Retrying (1/3)...
+[youtube] R_6ItxioUco: Downloading ios player API JSON
+[youtube] R_6ItxioUco: Downloading iframe API JS
+[youtube] R_6ItxioUco: Downloading player 1c78e434
+[youtube] R_6ItxioUco: Downloading web creator player API JSON
+[youtube] R_6ItxioUco: Downloading m3u8 information
+[youtube] R_6ItxioUco: Downloading initial data API JSON
+[info] R_6ItxioUco: Downloading 1 format(s): 251
+[download] Destination: SEX ED ROCKS!.webm
+[download] [0;94m  0.0%[0m of    3.97MiB at [0;32m 272.41KiB/s[0m ETA [0;33m00:14[0m
+[download] [0;94m  0.1%[0m of    3.97MiB at [0;32m   3.80KiB/s[0m ETA [0;33m17:49[0m
+[download] [0;94m  0.1%[0m of    3.97MiB at [0;32m   4.26KiB/s[0m ETA [0;33m15:52[0m
+[download] [0;94m  0.3%[0m of    3.97MiB at [0;32m   5.07KiB/s[0m ETA [0;33m13:19[0m
+[download] [0;94m  0.4%[0m of    3.97MiB at [0;32m   6.09KiB/s[0m ETA [0;33m11:03[0m
+[download] [0;94m  0.6%[0m of    3.97MiB at [0;32m   7.84KiB/s[0m ETA [0;33m08:34[0m
+[download] [0;94m  1.1%[0m of    3.97MiB at [0;32m  11.59KiB/s[0m ETA [0;33m05:46[0m
+[download] [0;94m  1.9%[0m of    3.97MiB at [0;32m  18.33KiB/s[0m ETA [0;33m03:37[0m
+[download] [0;94m  3.5%[0m of    3.97MiB at [0;32m  31.20KiB/s[0m ETA [0;33m02:05[0m
+[download] [0;94m  6.8%[0m of    3.97MiB at [0;32m  55.83KiB/s[0m ETA [0;33m01:07[0m
+[download] [0;94m 13.5%[0m of    3.97MiB at [0;32m  99.54KiB/s[0m ETA [0;33m00:35[0m
+[download] [0;94m 26.3%[0m of    3.97MiB at [0;32m 180.06KiB/s[0m ETA [0;33m00:16[0m
+[download] [0;94m 52.1%[0m of    3.97MiB at [0;32m 322.90KiB/s[0m ETA [0;33m00:06[0m
+[download] [0;94m 94.1%[0m of    3.97MiB at [0;32m 525.34KiB/s[0m ETA [0;33m00:00[0m
+[download] [0;94m100.0%[0m of    3.97MiB at [0;32m 529.24KiB/s[0m ETA [0;33m00:00[0m
+[download] 100% of    3.97MiB in [1;37m00:00:08[0m at [0;32m495.88KiB/s[0m
+[0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Error al descargar el video: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Iniciando descarga del video: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] Extracting URL: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] R_6ItxioUco: Downloading webpage
+[youtube] R_6ItxioUco: Downloading ios player API JSON
+[youtube] R_6ItxioUco: Downloading web creator player API JSON
+[youtube] R_6ItxioUco: Downloading m3u8 information
+[info] R_6ItxioUco: Downloading 1 format(s): 251
+[download] Destination: SEX ED ROCKS!.webm
+[download] [0;94m  0.0%[0m of    3.97MiB at [0;32m 277.35KiB/s[0m ETA [0;33m00:14[0m
+[download] [0;94m  0.1%[0m of    3.97MiB at [0;32m   7.85KiB/s[0m ETA [0;33m08:36[0m
+[download] [0;94m  0.2%[0m of    3.97MiB at [0;32m   8.21KiB/s[0m ETA [0;33m08:13[0m
+[download] [0;94m  0.4%[0m of    3.97MiB at [0;32m  11.75KiB/s[0m ETA [0;33m05:44[0m
+[download] [0;94m  0.8%[0m of    3.97MiB at [0;32m  16.81KiB/s[0m ETA [0;33m03:59[0m
+[download] [0;94m  1.5%[0m of    3.97MiB at [0;32m  23.98KiB/s[0m ETA [0;33m02:46[0m
+[download] [0;94m  2.6%[0m of    3.97MiB at [0;32m  36.55KiB/s[0m ETA [0;33m01:48[0m
+[download] [0;94m  4.8%[0m of    3.97MiB at [0;32m  58.58KiB/s[0m ETA [0;33m01:05[0m
+[download] [0;94m  9.3%[0m of    3.97MiB at [0;32m 101.81KiB/s[0m ETA [0;33m00:36[0m
+[download] [0;94m 18.2%[0m of    3.97MiB at [0;32m 169.18KiB/s[0m ETA [0;33m00:19[0m
+[download] [0;94m 31.5%[0m of    3.97MiB at [0;32m 267.73KiB/s[0m ETA [0;33m00:10[0m
+[download] [0;94m 58.1%[0m of    3.97MiB at [0;32m 457.33KiB/s[0m ETA [0;33m00:03[0m
+[download] [0;94m100.0%[0m of    3.97MiB at [0;32m 732.16KiB/s[0m ETA [0;33m00:00[0m
+[download] 100% of    3.97MiB in [1;37m00:00:06[0m at [0;32m665.68KiB/s[0m
+[0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Error al descargar el video: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
