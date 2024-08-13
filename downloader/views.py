@@ -7,6 +7,7 @@ from googleapiclient.errors import HttpError
 from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
 import logging
 from .tasks import download_video_task
+from celery.result import AsyncResult
 
 def get_video_info_from_youtube(video_id):
     try:
@@ -56,3 +57,13 @@ def download_video(request, format):
 
     # Devuelve una respuesta que indica que la tarea ha comenzado
     return JsonResponse({"status": "Task started", "task_id": task.id})
+
+def get_task_status(request, task_id):
+    task = AsyncResult(task_id)
+    if task.state == 'SUCCESS':
+        result = task.result
+        return JsonResponse({'status': 'SUCCESS', 'file_url': result['file_url']})
+    elif task.state == 'FAILURE':
+        return JsonResponse({'status': 'FAILURE', 'error': str(task.result)})
+    else:
+        return JsonResponse({'status': task.state})
