@@ -8,6 +8,7 @@ from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
 import logging
 from .tasks import download_video_task
 from celery.result import AsyncResult
+from celery import shared_task
 
 def get_video_info_from_youtube(video_id):
     try:
