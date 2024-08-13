@@ -50,20 +50,6 @@
     <!-- Custom JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function checkTaskStatus(taskId) {
-            $.get(`/task-status/${taskId}/`, function(data) {
-                if (data.status === 'SUCCESS') {
-                    window.location.href = data.file_url;
-                } else if (data.status === 'FAILURE') {
-                    alert('Error: ' + data.error);
-                } else {
-                    setTimeout(function() {
-                        checkTaskStatus(taskId);
-                    }, 2000);
-                }
-            });
-        }
-
         $("#downloadMp4Button").click(function() {
             var videoUrl = $("#downloadMp4Form input[name='video_url']").val();
             
@@ -75,8 +61,8 @@
             }
 
             $.post($("#downloadMp4Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-                if (data.status === "Task started") {
-                    checkTaskStatus(data.task_id);
+                if (data.status === "SUCCESS") {
+                    window.location.href = data.file_url;
                 } else {
                     alert("Error: " + data.error);
                 }
@@ -94,14 +80,14 @@
             }
 
             $.post($("#downloadMp3Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-                if (data.status === "Task started") {
-                    checkTaskStatus(data.task_id);
+                if (data.status === "SUCCESS") {
+                    window.location.href = data.file_url;
                 } else {
                     alert("Error: " + data.error);
                 }
             });
         });
-
     </script>
+
 </body>
 </html>

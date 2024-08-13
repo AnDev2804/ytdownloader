@@ -83,7 +83,7 @@ def download_video(request, format):
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '64',
+                    'preferredquality': '128',
                 }],
                 'outtmpl': '%(title)s.%(ext)s',
                 'n_threads': 1,

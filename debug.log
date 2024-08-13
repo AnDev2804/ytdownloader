@@ -4703,3 +4703,49 @@ Iniciando descarga del video: https://www.youtube.com/watch?v=R_6ItxioUco
 [download] 100% of    3.97MiB in [1;37m00:00:06[0m at [0;32m665.68KiB/s[0m
 [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
 Error al descargar el video: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Iniciando descarga del video: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] Extracting URL: https://www.youtube.com/watch?v=R_6ItxioUco
+[youtube] R_6ItxioUco: Downloading webpage
+[youtube] R_6ItxioUco: Downloading ios player API JSON
+[youtube] R_6ItxioUco: Downloading web creator player API JSON
+[youtube] R_6ItxioUco: Downloading m3u8 information
+[info] R_6ItxioUco: Downloading 1 format(s): 251
+[download] Destination: SEX ED ROCKS!.webm
+[download] [0;94m  0.0%[0m of    3.97MiB at [0;32m   8.54KiB/s[0m ETA [0;33m07:55[0m
+[download] [0;94m  0.1%[0m of    3.97MiB at [0;32m   5.23KiB/s[0m ETA [0;33m12:56[0m
+[download] [0;94m  0.2%[0m of    3.97MiB at [0;32m   6.81KiB/s[0m ETA [0;33m09:55[0m
+[download] [0;94m  0.4%[0m of    3.97MiB at [0;32m   9.60KiB/s[0m ETA [0;33m07:01[0m
+[download] [0;94m  0.7%[0m of    3.97MiB at [0;32m  14.01KiB/s[0m ETA [0;33m04:47[0m
+[download] [0;94m  1.4%[0m of    3.97MiB at [0;32m  19.48KiB/s[0m ETA [0;33m03:25[0m
+[download] [0;94m  2.3%[0m of    3.97MiB at [0;32m  27.56KiB/s[0m ETA [0;33m02:24[0m
+[download] [0;94m  4.0%[0m of    3.97MiB at [0;32m  43.23KiB/s[0m ETA [0;33m01:30[0m
+[download] [0;94m  7.5%[0m of    3.97MiB at [0;32m  70.75KiB/s[0m ETA [0;33m00:53[0m
+[download] [0;94m 13.9%[0m of    3.97MiB at [0;32m 118.58KiB/s[0m ETA [0;33m00:29[0m
+[download] [0;94m 26.7%[0m of    3.97MiB at [0;32m 142.54KiB/s[0m ETA [0;33m00:20[0m
+[download] [0;94m 33.1%[0m of    3.97MiB at [0;32m 138.00KiB/s[0m ETA [0;33m00:19[0m
+[download] [0;94m 36.3%[0m of    3.97MiB at [0;32m 137.20KiB/s[0m ETA [0;33m00:18[0m
+[download] [0;94m 39.5%[0m of    3.97MiB at [0;32m 136.49KiB/s[0m ETA [0;33m00:17[0m
+[download] [0;94m 42.7%[0m of    3.97MiB at [0;32m 135.86KiB/s[0m ETA [0;33m00:17[0m
+[download] [0;94m 45.8%[0m of    3.97MiB at [0;32m 134.68KiB/s[0m ETA [0;33m00:16[0m
+[download] [0;94m 48.8%[0m of    3.97MiB at [0;32m 134.68KiB/s[0m ETA [0;33m00:15[0m
+[download] [0;94m 52.1%[0m of    3.97MiB at [0;32m 133.62KiB/s[0m ETA [0;33m00:14[0m
+[download] [0;94m 55.1%[0m of    3.97MiB at [0;32m 133.73KiB/s[0m ETA [0;33m00:13[0m
+[download] [0;94m 58.4%[0m of    3.97MiB at [0;32m 132.89KiB/s[0m ETA [0;33m00:12[0m
+[download] [0;94m 61.4%[0m of    3.97MiB at [0;32m 133.09KiB/s[0m ETA [0;33m00:11[0m
+[download] [0;94m 64.8%[0m of    3.97MiB at [0;32m 132.39KiB/s[0m ETA [0;33m00:10[0m
+[download] [0;94m 67.7%[0m of    3.97MiB at [0;32m 132.62KiB/s[0m ETA [0;33m00:09[0m
+[download] [0;94m 71.1%[0m of    3.97MiB at [0;32m 132.08KiB/s[0m ETA [0;33m00:08[0m
+[download] [0;94m 74.1%[0m of    3.97MiB at [0;32m 131.62KiB/s[0m ETA [0;33m00:07[0m
+[download] [0;94m 77.1%[0m of    3.97MiB at [0;32m 131.87KiB/s[0m ETA [0;33m00:07[0m
+[download] [0;94m 80.5%[0m of    3.97MiB at [0;32m 131.44KiB/s[0m ETA [0;33m00:06[0m
+[download] [0;94m 83.6%[0m of    3.97MiB at [0;32m 131.07KiB/s[0m ETA [0;33m00:05[0m
+[download] [0;94m 86.6%[0m of    3.97MiB at [0;32m 131.32KiB/s[0m ETA [0;33m00:04[0m
+[download] [0;94m 90.0%[0m of    3.97MiB at [0;32m 130.97KiB/s[0m ETA [0;33m00:03[0m
+[download] [0;94m 93.0%[0m of    3.97MiB at [0;32m 130.67KiB/s[0m ETA [0;33m00:02[0m
+[download] [0;94m 96.0%[0m of    3.97MiB at [0;32m 130.91KiB/s[0m ETA [0;33m00:01[0m
+[download] [0;94m 99.4%[0m of    3.97MiB at [0;32m 130.62KiB/s[0m ETA [0;33m00:00[0m
+[download] [0;94m100.0%[0m of    3.97MiB at [0;32m 129.71KiB/s[0m ETA [0;33m00:00[0m
+[download] 100% of    3.97MiB in [1;37m00:00:32[0m at [0;32m126.53KiB/s[0m
+[ExtractAudio] Destination: SEX ED ROCKS!.mp3
+Deleting original file SEX ED ROCKS!.webm (pass -k to keep)
+Video descargado con éxito: SEX ED ROCKS!.webm
