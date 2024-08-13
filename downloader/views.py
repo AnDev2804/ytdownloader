@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from django.http import FileResponse
+from django.http import JsonResponse
 import os
 from yt_dlp import YoutubeDL
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from django.conf import settings  # Importar settings para usar YOUTUBE_API_KEY
 import logging
-from celery import shared_task
+from .tasks import download_video_task
 
 def get_video_info_from_youtube(video_id):
     try:
@@ -25,6 +25,7 @@ def get_video_info_from_youtube(video_id):
     except HttpError as e:
         print(f"An HTTP error {e.resp.status} occurred: {e.content}")
         return None
+
 def home(request):
     video_info = None
     error_message = None
@@ -45,50 +46,13 @@ def home(request):
     
     return render(request, 'index.html', {'video_info': video_info, 'error_message': error_message})
 
-logger = logging.getLogger(__name__)
-@shared_task
 def download_video(request, format):
     video_url = request.POST.get('video_url')
     if not video_url:
-        logger.error("No se proporcionó una URL.")
-        return render(request, 'index.html', {'error_message': "No se proporcionó una URL."})
-    
-    ydl_opts = {}
-    file_name = None
-    
-    if format == 'mp4':
-        ydl_opts = {
-            'format': 'worstvideo',  # Cambia a una calidad más baja
-            'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': 'cookies.txt',  
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-            'referer': 'https://www.youtube.com/'
-        }
-    if format == 'mp3':
-        ydl_opts = {
-            'format': 'worstaudio',  # Cambia a una calidad más baja
-            'outtmpl': '%(title)s.%(ext)s',
-            'cookiefile': 'cookies.txt',  
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-            'referer': 'https://www.youtube.com/'
-        }
+        return JsonResponse({"error": "No se proporcionó una URL."})
 
-    try:
-        logger.info("Iniciando descarga con yt-dlp...")
-        with YoutubeDL(ydl_opts) as ydl:
-            info_dict = ydl.extract_info(video_url)
-            file_name = ydl.prepare_filename(info_dict)
-            logger.info(f"Archivo descargado: {file_name}")
-        
-        with open(file_name, 'rb') as file:
-            response = FileResponse(file)
-            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_name)}"'
-            logger.info("Archivo listo para enviar.")
-        
-        os.remove(file_name)  # Elimina el archivo después de servirlo
-        return response
-    
-    except Exception as e:
-        error_message = f"Error al descargar el video: {str(e)}"
-        logger.error(error_message)
-        return render(request, 'index.html', {'error_message': error_message})
+    # Llama a la tarea asíncrona
+    task = download_video_task.delay(video_url, format)
+
+    # Devuelve una respuesta que indica que la tarea ha comenzado
+    return JsonResponse({"status": "Task started", "task_id": task.id})
