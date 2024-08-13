@@ -26,14 +26,18 @@
             <h2>{{ video_info.title }}</h2>
             <p>Canal: {{ video_info.channel_title }}</p>
             <img src="{{ video_info.thumbnail_url }}" alt="Thumbnail">
+            
+            <!-- Formulario para descargar como MP4 -->
             <form id="downloadMp4Form" action="/download/mp4/" method="post">
                 {% csrf_token %}
-                <input type="text" name="video_url" value="{{ video_info.video_url }}">
+                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
                 <button type="button" id="downloadMp4Button" class="btn btn-success mt-3">Descargar como MP4</button>
             </form>
+
+            <!-- Formulario para descargar como MP3 -->
             <form id="downloadMp3Form" action="/download/mp3/" method="post">
                 {% csrf_token %}
-                <input type="text" name="video_url" value="{{ video_info.video_url }}">
+                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
                 <button type="button" id="downloadMp3Button" class="btn btn-success mt-3">Descargar como MP3</button>
             </form>
         </div>
@@ -46,16 +50,6 @@
     <!-- Custom JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault(); // Evita que el formulario se envíe automáticamente
-                const videoUrl = this.querySelector('input[name="video_url"]').value;
-                console.log("URL que se va a enviar:", videoUrl); // Esto imprimirá la URL en la consola
-                // Aquí puedes agregar el código para enviar el formulario vía AJAX si es necesario
-                form.submit(); // Esto enviará el formulario después de hacer el debug
-            });
-        });
-
         function checkTaskStatus(taskId) {
             $.get(`/task-status/${taskId}/`, function(data) {
                 if (data.status === 'SUCCESS') {
@@ -71,38 +65,42 @@
         }
 
         $("#downloadMp4Button").click(function() {
-    var videoUrl = $("input[name='video_url']").val();
-    
-    if (!videoUrl) {
-        alert("Error: No se proporcionó una URL.");
-        return;
-    }
+            var videoUrl = $("#downloadMp4Form input[name='video_url']").val();
+            
+            console.log("Intentando descargar MP4 con la URL:", videoUrl); // Debugging
 
-    $.post($("#downloadMp4Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-            if (data.status === "Task started") {
-                checkTaskStatus(data.task_id);
-            } else {
-                alert("Error: " + data.error);
+            if (!videoUrl) {
+                alert("Error: No se proporcionó una URL.");
+                return;
             }
+
+            $.post($("#downloadMp4Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
+                if (data.status === "Task started") {
+                    checkTaskStatus(data.task_id);
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
         });
-    });
 
-    $("#downloadMp3Button").click(function() {
-        var videoUrl = $("input[name='video_url']").val();
-        
-        if (!videoUrl) {
-            alert("Error: No se proporcionó una URL.");
-            return;
-        }
+        $("#downloadMp3Button").click(function() {
+            var videoUrl = $("#downloadMp3Form input[name='video_url']").val();
 
-        $.post($("#downloadMp3Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
-            if (data.status === "Task started") {
-                checkTaskStatus(data.task_id);
-            } else {
-                alert("Error: " + data.error);
+            console.log("Intentando descargar MP3 con la URL:", videoUrl); // Debugging
+            
+            if (!videoUrl) {
+                alert("Error: No se proporcionó una URL.");
+                return;
             }
+
+            $.post($("#downloadMp3Form").attr('action'), { video_url: videoUrl, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() }, function(data) {
+                if (data.status === "Task started") {
+                    checkTaskStatus(data.task_id);
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
         });
-    });
 
     </script>
 </body>
