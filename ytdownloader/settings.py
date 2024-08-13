@@ -114,7 +114,7 @@ STATICFILES_DIRS = [
 YOUTUBE_API_KEY = 'AIzaSyDoHf0_HYjbdAuGQI6kCGQK8WbG11OJtD0'
 
 
-CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = 'redis://redis-12356.c266.us-east-1-3.ec2.redns.redis-cloud.com:12356/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
