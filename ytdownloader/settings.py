@@ -98,27 +98,17 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
+            'filename': BASE_DIR / 'debug.log',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'downloader': {  # Aquí puedes especificar tu aplicación
-            'handlers': ['console', 'file'],
+        'downloader': {
+            'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
         },
     },
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
