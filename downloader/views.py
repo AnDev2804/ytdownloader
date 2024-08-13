@@ -76,6 +76,7 @@ def download_video(request, format):
         elif format == 'mp3':
             ydl_opts = {
                 'format': 'bestaudio/best',
+                'cookiefile': 'cookies.txt',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
