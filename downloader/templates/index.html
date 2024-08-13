@@ -28,12 +28,12 @@
             <img src="{{ video_info.thumbnail_url }}" alt="Thumbnail">
             <form action="/download/mp4/" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <input type="text" name="video_url" value="{{ video_info.video_url }}">
                 <button type="submit" class="btn btn-success mt-3">Descargar como MP4</button>
             </form>
             <form action="/download/mp3/" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="video_url" value="{{ video_info.video_url }}">
+                <input type="text" name="video_url" value="{{ video_info.video_url }}">
                 <button type="submit" class="btn btn-success mt-3">Descargar como MP3</button>
             </form>
         </div>
