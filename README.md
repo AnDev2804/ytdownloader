@@ -1,69 +1,69 @@
 # YouTube Downloader - YTDownloader 🎥🎶
 
-**YTDownloader** es una aplicación web sencilla que te permite descargar videos y audio desde YouTube en formatos MP3 y MP4 de manera rápida y eficiente.
+**YTDownloader** is a simple web application that allows you to download videos and audio from YouTube in MP3 and MP4 formats quickly and efficiently.
 
-## 🚀 Características Principales
+## 🚀 Main Features.
 
-- **Descarga de videos y audio**: Soporta descargas en formato MP4 (video) y MP3 (audio).
-- **Interfaz simple**: Introduce la URL del video de YouTube y selecciona el formato de descarga.
-- **Procesamiento eficiente**: Usamos `yt-dlp` para descargar y `FFmpeg` para procesar y convertir los archivos.
-- **Tareas asíncronas**: Implementación de Celery para gestionar las descargas en segundo plano sin bloquear la interfaz.
-- **Almacenamiento y acceso**: Los archivos descargados son almacenados en el servidor y se proporciona un enlace de descarga directo.
+- **Video and audio download**: Supports MP4 (video) and MP3 (audio) format downloads.
+- **Simple interface**: Input YouTube video URL and select download format.
+- Efficient processing**: We use `yt-dlp` to download and `FFmpeg` to process and convert the files.
+- Asynchronous tasks**: Celery implementation to manage background downloads without blocking the interface.
+- **Storage and access**: Downloaded files are stored on the server and a direct download link is provided.
 
-## 🛠 Tecnologías Utilizadas
+## 🛠 Technologies Used.
 
-- **Python**: Lenguaje principal para el backend de la aplicación.
-- **Django**: Framework web para manejar las vistas, modelos y urls.
-- **yt-dlp**: Librería para extraer y descargar videos y audio desde YouTube.
-- **Celery**: Manejo de tareas en segundo plano (asíncronas).
-- **Redis**: Broker de mensajes para Celery.
-- **JavaScript & jQuery**: Interacciones dinámicas en la interfaz.
-- **HTML5 & CSS3**: Diseño y estructura de la aplicación web.
-- **FFmpeg**: Herramienta utilizada para convertir videos y audio entre diferentes formatos.
+- Python**: Main language for the backend of the application.
+- **Django**: Web framework to handle views, models and urls.
+- **yt-dlp**: Library to extract and download videos and audio from YouTube.
+- Celery**: Background task management (asynchronous).
+- Redis**: Message broker for Celery.
+- JavaScript & jQuery**: Dynamic interactions in the interface.
+- HTML5 & CSS3**: Web application design and structure.
+- **FFmpeg**: Tool used to convert videos and audio between different formats.
 
-## 📋 Instrucciones de Instalación
+## 📋 Installation Instructions.
 
-1. **Clona el repositorio**:
+1. **Clone repository**:
     ```
     git clone https://github.com/AnDev2804/ytdownloader.git
     ```
 
-2. **Configura las dependencias**:
+2. **Set up the dependencies**:
     ```
     pip install -r requirements.txt
     ```
 
-3. **Configura el broker de Celery**:
-    - Asegúrate de tener Redis configurado correctamente. Establece el URL en `settings.py`:
+3. **Configure the Celery broker**:
+    - Make sure you have Redis configured correctly. Set the URL in `settings.py`:
     ```
-    CELERY_BROKER_URL = 'redis://tu-redis-url'
+    CELERY_BROKER_URL = 'redis://your-redis-url'
     ```
 
-4. **Ejecuta el servidor de desarrollo**:
+4. **Run the development server**:
     ```
     python manage.py runserver
     ```
 
-5. **Inicia el worker de Celery**:
+5. **Start the Celery worker**:
     ```
     celery -A ytdownloader worker --loglevel=info
     ```
 
-6. **Descargar y configurar FFmpeg**:
-    - Descarga e instala FFmpeg en tu sistema, luego establece la ruta en tu entorno de desarrollo.
+6. **Download and configure FFmpeg**:
+    - Download and install FFmpeg on your system, then set the path in your development environment.
 
-## 🖥 Uso de la Aplicación
+## 🖥 Using the Application
 
-1. Ingresa la URL del video de YouTube que deseas descargar.
-2. Selecciona el formato deseado: MP4 o MP3.
-3. Haz clic en el botón de descarga, y la aplicación se encargará del resto.
+1. Enter the URL of the YouTube video you want to download.
+2. Select the desired format: MP4 or MP3.
+3. Click the download button, and the application will take care of the rest.
 
-## 🚧 Estado del Proyecto
+## 🚧 Project status
 
-Este proyecto está en constante mejora. Se seguirán añadiendo características y mejoras para una experiencia más fluida y eficiente.
+This project is constantly being improved. Features and improvements will continue to be added for a smoother and more efficient experience.
 
-¡Contribuciones y sugerencias son bienvenidas!
+Contributions and suggestions are welcome!
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+This project is licensed under the MIT License. See the LICENSE file for more details.
