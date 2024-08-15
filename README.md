@@ -12,13 +12,13 @@
 
 ## 🛠 Technologies Used.
 
-- Python**: Main language for the backend of the application.
+- **Python**: Main language for the backend of the application.
 - **Django**: Web framework to handle views, models and urls.
 - **yt-dlp**: Library to extract and download videos and audio from YouTube.
-- Celery**: Background task management (asynchronous).
-- Redis**: Message broker for Celery.
-- JavaScript & jQuery**: Dynamic interactions in the interface.
-- HTML5 & CSS3**: Web application design and structure.
+- **Celery**: Background task management (asynchronous).
+- **Redis**: Message broker for Celery.
+- **JavaScript & jQuery**: Dynamic interactions in the interface.
+- **HTML5 & CSS3**: Web application design and structure.
 - **FFmpeg**: Tool used to convert videos and audio between different formats.
 
 ## 📋 Installation Instructions.
@@ -67,3 +67,7 @@ Contributions and suggestions are welcome!
 ## 📄 License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Note
+
+This is one of the most current projects I have done in Python. There are more like it on the way...
