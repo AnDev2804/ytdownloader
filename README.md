@@ -6,8 +6,8 @@
 
 - **Video and audio download**: Supports MP4 (video) and MP3 (audio) format downloads.
 - **Simple interface**: Input YouTube video URL and select download format.
-- Efficient processing**: We use `yt-dlp` to download and `FFmpeg` to process and convert the files.
-- Asynchronous tasks**: Celery implementation to manage background downloads without blocking the interface.
+- **Efficient processing**: We use `yt-dlp` to download and `FFmpeg` to process and convert the files.
+- **Asynchronous tasks**: Celery implementation to manage background downloads without blocking the interface.
 - **Storage and access**: Downloaded files are stored on the server and a direct download link is provided.
 
 ## 🛠 Technologies Used.
