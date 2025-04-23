@@ -138,7 +138,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'downloader/static'),
 ]
-YOUTUBE_API_KEY = 'AIzaSyDoHf0_HYjbdAuGQI6kCGQK8WbG11OJtD0'
+# Your youtube API KEY from Google Cloud Console
+YOUTUBE_API_KEY = '123456ABCDEFG'
 
 CELERY_BROKER_URL = 'redis://default:P7ql4EAI7rYhqvrcJKEqUryMULnDXgEx@redis-12356.c266.us-east-1-3.ec2.redns.redis-cloud.com:12356/0'
 CELERY_RESULT_BACKEND = 'redis://default:P7ql4EAI7rYhqvrcJKEqUryMULnDXgEx@redis-12356.c266.us-east-1-3.ec2.redns.redis-cloud.com:12356/0'
@@ -166,7 +167,8 @@ class DisableMigrations:
         return 'migrations'
 
 MIGRATION_MODULES = DisableMigrations()
-FFMPEG_PATH = r'C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\ffmpeg-2025-03-24-git-cbbc927a67-essentials_build\bin\ffmpeg.exe'
+#your ffmpeg.exe directory
+FFMPEG_PATH = r'.\ffmpeg-2025-03-24-git-cbbc927a67-essentials_build\bin\ffmpeg.exe'
 
 # Con esta versión más limpia:
 FFMPEG_DIR = os.path.join(BASE_DIR, 'ffmpeg-2025-03-24-git-cbbc927a67-essentials_build', 'bin')
