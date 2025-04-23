@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',  # ¡Añade esta línea!
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -47,7 +48,7 @@ ROOT_URLCONF = 'ytdownloader.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'downloader/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,15 +96,22 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'debug.log',
+            'filename': 'debug.log',
         },
     },
     'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
         'downloader': {
-            'handlers': ['file'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -125,9 +133,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Configuración de static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "downloader" / "static",
+    os.path.join(BASE_DIR, 'downloader/static'),
 ]
 YOUTUBE_API_KEY = 'AIzaSyDoHf0_HYjbdAuGQI6kCGQK8WbG11OJtD0'
 
@@ -138,9 +147,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
+# Configuración de medios
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'downloader/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -157,3 +166,18 @@ class DisableMigrations:
         return 'migrations'
 
 MIGRATION_MODULES = DisableMigrations()
+FFMPEG_PATH = r'C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\ffmpeg-2025-03-24-git-cbbc927a67-essentials_build\bin\ffmpeg.exe'
+
+# Con esta versión más limpia:
+FFMPEG_DIR = os.path.join(BASE_DIR, 'ffmpeg-2025-03-24-git-cbbc927a67-essentials_build', 'bin')
+FFMPEG_PATH = os.path.join(FFMPEG_DIR, 'ffmpeg.exe')
+FFPROBE_PATH = os.path.join(FFMPEG_DIR, 'ffprobe.exe')
+
+# Configuración yt-dlp
+YTDL_OPTIONS = {
+    'quiet': True,
+    'no_warnings': True,
+    'restrictfilenames': True,
+    'noplaylist': True,
+    'ffmpeg_location': FFMPEG_DIR,  # Usa el directorio
+}

@@ -5157,3 +5157,162 @@ Iniciando descarga del video: https://www.youtube.com/watch?v=c2P7loq6Yrs
 [ExtractAudio] Destination: media\COMIC DE PADRINOS MAGICOS....mp3
 Deleting original file media\COMIC DE PADRINOS MAGICOS....webm (pass -k to keep)
 Video descargado con éxito: media\COMIC DE PADRINOS MAGICOS....webm
+Error al descargar el video: HTTP Error 400: Bad Request
+Error al descargar el video: HTTP Error 400: Bad Request
+HTTP error occurred: HTTP Error 400: Bad Request
+HTTP error occurred: 400 - Bad Request
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=gJL9ck3EKcA&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=gJL9ck3EKcA&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+Error al descargar el video: Exception while accessing title of https://youtube.com/watch?v=gJL9ck3EKcA. Please file a bug report at https://github.com/pytube/pytube
+Error al descargar el video: Exception while accessing title of https://youtube.com/watch?v=gJL9ck3EKcA. Please file a bug report at https://github.com/pytube/pytube
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+HTTP error occurred: 400 - Bad Request - https://www.youtube.com/youtubei/v1/player?videoId=R_6ItxioUco&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&contentCheckOk=True&racyCheckOk=True
+Error en descarga
+Traceback (most recent call last):
+  File "C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py", line 90, in download_video
+    clean_title = "".join(c if c.isalnum() else "_" for c in yt.title)[:50]  # Limitar longitud
+                                                             ^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\__main__.py", line 341, in title
+    self._title = self.vid_info['videoDetails']['title']
+                  ^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\__main__.py", line 246, in vid_info
+    innertube_response = innertube.player(self.video_id)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\innertube.py", line 448, in player
+    return self._call_api(endpoint, query, self.base_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\innertube.py", line 390, in _call_api
+    response = request._execute_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\request.py", line 37, in _execute_request
+    return urlopen(request, timeout=timeout)  # nosec
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2803
+"POST / HTTP/1.1" 200 4058
+Iniciando descarga de mp3 para URL: https://www.youtube.com/watch?v=R_6ItxioUco
+Error en descarga de mp3:
+Traceback (most recent call last):
+  File "C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py", line 93, in download_video
+    clean_title = "".join(c if c.isalnum() else "_" for c in yt.title)[:50]
+                                                             ^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\__main__.py", line 341, in title
+    self._title = self.vid_info['videoDetails']['title']
+                  ^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\__main__.py", line 246, in vid_info
+    innertube_response = innertube.player(self.video_id)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\innertube.py", line 448, in player
+    return self._call_api(endpoint, query, self.base_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\innertube.py", line 390, in _call_api
+    response = request._execute_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytube\request.py", line 37, in _execute_request
+    return urlopen(request, timeout=timeout)  # nosec
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Internal Server Error: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 500 81
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\ytdownloader\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2803
+"POST / HTTP/1.1" 200 4058
+Iniciando descarga de mp3 para URL: https://www.youtube.com/watch?v=R_6ItxioUco
+Bad Request: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 400 87
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2803
+"POST / HTTP/1.1" 200 4058
+Iniciando descarga de mp3 para URL: https://www.youtube.com/watch?v=R_6ItxioUco
+Bad Request: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 400 87
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2913
+"POST / HTTP/1.1" 200 4168
+Error en descarga: [0;31mERROR:[0m unable to download video data: HTTP Error 403: Forbidden
+Internal Server Error: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 500 97
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2913
+"POST / HTTP/1.1" 200 4168
+Error en descarga: [0;31mERROR:[0m unable to download video data: HTTP Error 403: Forbidden
+Service Unavailable: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 503 87
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2913
+"POST / HTTP/1.1" 200 4168
+Error en descarga: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Internal Server Error: /download/mp3/
+Traceback (most recent call last):
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view downloader.views.download_video didn't return an HttpResponse object. It returned None instead.
+"POST /download/mp3/ HTTP/1.1" 500 68331
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2913
+"POST / HTTP/1.1" 200 4168
+Error en descarga: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+Internal Server Error: /download/mp3/
+"POST /download/mp3/ HTTP/1.1" 500 180
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\downloader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Usuario\Desktop\Proyectos Python\Nivel facil\Descargador de YouTube\ytdownloader\ytdownloader\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2913
+"POST / HTTP/1.1" 200 4168
+"POST /download/mp3/ HTTP/1.1" 200 94
+"GET /media/SEX%20ED%20ROCKS!.mp3 HTTP/1.1" 200 6436823
+"POST /download/mp4/ HTTP/1.1" 200 94
+"GET /media/SEX%20ED%20ROCKS!.mp4 HTTP/1.1" 200 20870265

@@ -51,26 +51,46 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $("#downloadMp4Button, #downloadMp3Button").click(function(event) {
-            event.preventDefault();
-            var videoUrl = $(this).closest("form").find("input[name='video_url']").val();
-            var downloadFormat = $(this).attr("id") === "downloadMp4Button" ? "mp4" : "mp3";
-    
-            if (!videoUrl) {
-                alert("Error: No se proporcionó una URL.");
-                return;
-            }
-    
-            $.post(`/download/${downloadFormat}/`, { 
-                video_url: videoUrl, 
-                csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val() 
-            }, function(data) {
+        event.preventDefault();
+        const button = $(this);
+        const form = button.closest("form");
+        const format = button.attr("id") === "downloadMp4Button" ? "mp4" : "mp3";
+        
+        button.prop("disabled", true).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Descargando...`
+        );
+        
+        $.ajax({
+            url: `/download/${format}/`,
+            type: 'POST',
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(data) {
                 if (data.status === "SUCCESS") {
-                    alert("¡Descarga completada con éxito!");
+                    // Descarga automática
+                    const a = document.createElement('a');
+                    a.href = data.file_url;
+                    a.download = data.filename || `video.${format}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
                 } else {
-                    alert("Error: " + data.error);
+                    alert(`Error: ${data.error || "Error desconocido"}`);
                 }
-            });
+            },
+            error: function(xhr) {
+                const errorMsg = xhr.responseJSON?.error || 
+                            xhr.statusText || 
+                            "Error en la conexión";
+                alert(`Error: ${errorMsg}`);
+            },
+            complete: function() {
+                button.prop("disabled", false).text(
+                    format === 'mp4' ? 'Descargar como MP4' : 'Descargar como MP3'
+                );
+            }
         });
+    });
     </script>
 
 </body>

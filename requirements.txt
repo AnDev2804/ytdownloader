@@ -1,7 +1,8 @@
 Django==4.0.6
 gunicorn==22.0.0
-yt-dlp
+yt-dlp==2023.11.16
 mysqlclient==2.2.4
-google-api-python-client
-celery
-redis
+google-api-python-client==2.85.0
+celery==5.3.4
+redis==4.5.5
+ffmpeg-python==0.2.0
